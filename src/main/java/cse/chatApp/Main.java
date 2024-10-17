@@ -4,6 +4,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 import java.awt.*;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -20,6 +21,9 @@ public class Main {
     private static JPanel mainPanel;
     private static JPanel contentPanel;
     private static JButton currentButton;
+
+//    initializing userDAO class
+    private static UserDAO userDAO = new UserDAO();
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
@@ -148,9 +152,10 @@ public class Main {
         content.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         if ("People".equals(menuType)) {
-            content.add(new JLabel("Person 1"));
-            content.add(new JLabel("Person 2"));
-            content.add(new JLabel("Person 3"));
+            List<String> users = userDAO.getAllUsers(); // Fetch users from database
+            for (String username : users) {
+                content.add(new JLabel(username)); // Display each username
+            }
         } else if ("Groups".equals(menuType)) {
             content.add(new JLabel("Group 1"));
             content.add(new JLabel("Group 2"));
