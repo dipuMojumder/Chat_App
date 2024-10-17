@@ -120,10 +120,24 @@ public class RegistrationWindow extends JFrame {
     }
 
     private void handleSignUp() {
-        // Handle registration logic here (validation, saving data, etc.)
-        // Assuming successful registration for demonstration
-        showRegistrationSuccessDialog();
+        String firstName = firstNameField.getText();
+        String lastName = lastNameField.getText();
+        String email = emailField.getText();
+        String password = new String(passwordField.getPassword());
+        String userName = userNameField.getText();
+        String gender = genderComboBox.getSelectedItem().toString();
+        String phone = phoneField.getText();
+
+        UserDAO userDAO = new UserDAO();
+        boolean success = userDAO.registerUser(firstName, lastName, email, password, userName, gender, phone);
+
+        if (success) {
+            showRegistrationSuccessDialog();
+        } else {
+            JOptionPane.showMessageDialog(this, "Registration failed. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
+
 
     private void showRegistrationSuccessDialog() {
         JDialog dialog = new JDialog(this, "Registration Successful", true);

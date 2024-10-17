@@ -12,6 +12,7 @@ public class LoginWindow extends JFrame {
     private JLabel logoLabel, welcomeLabel;
     private JButton loginButton, signUpButton;
 
+
     public LoginWindow() {
         setTitle("Chat App Login");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -127,11 +128,6 @@ public class LoginWindow extends JFrame {
         return passwordField;
     }
 
-    private void styleComboBox(JComboBox<String> comboBox) {
-        comboBox.setPreferredSize(new Dimension(325, 50));
-        comboBox.setFont(new Font("Arial", Font.PLAIN, 16));
-        comboBox.setBorder(BorderFactory.createLineBorder(new Color(200, 200, 200)));
-    }
 
     private JButton createStyledButton(String text, Color color) {
         JButton button = new JButton(text);
@@ -169,16 +165,22 @@ public class LoginWindow extends JFrame {
     }
 
     private void handleLogin() {
-        String username = userText.getText();
+        String username = userText.getText(); // Updated to use userText/ Direct assignment
         String password = new String(passText.getPassword());
 
-        // Add validation logic for login credentials here if needed
+        UserDAO userDAO = new UserDAO();
+        boolean isValidUser = userDAO.validateUser(username, password);
 
-        // Open Main chat window
-        dispose(); // Close the Login window
-        Main.createAndShowMainGUI(); // Open the Main chat window
+        if (isValidUser) {
+//            JOptionPane.showMessageDialog(this, "Login successful!");
+            dispose(); // Close the Login window
+            Main.createAndShowMainGUI(); // Open the Main chat window
+        } else {
+            System.out.printf(username);
+            System.out.printf(password);
+            JOptionPane.showMessageDialog(this, "Invalid credentials. Please try again.", "Login Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
-
 
 
     private void openSignUpWindow() {

@@ -26,6 +26,13 @@
             <artifactId>miglayout-swing</artifactId>
             <version>5.2</version>
         </dependency>
+
+            <!-- MySQL dependency -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.32</version> <!-- Use the version that matches your MySQL installation -->
+        </dependency>
     </dependencies>
 
     <repositories>
