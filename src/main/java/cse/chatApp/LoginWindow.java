@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class LoginWindow extends JFrame {
-    private JTextField userText;
+    public static JTextField userText;
     private JPasswordField passText;
     private JComboBox<String> roleComboBox;
     private JPanel leftPanel, rightPanel;
@@ -22,8 +22,11 @@ public class LoginWindow extends JFrame {
 
         createPanels();
         createLoginComponents();
-
         setVisible(true);
+    }
+
+    public static JTextField getUserName() {
+        return userText;
     }
 
     private void createPanels() {
@@ -172,7 +175,7 @@ public class LoginWindow extends JFrame {
         boolean isValidUser = userDAO.validateUser(username, password);
 
         if (isValidUser) {
-//            JOptionPane.showMessageDialog(this, "Login successful!");
+//          JOptionPane.showMessageDialog(this, "Login successful!");
             dispose(); // Close the Login window
             Main.createAndShowMainGUI(); // Open the Main chat window
         } else {
