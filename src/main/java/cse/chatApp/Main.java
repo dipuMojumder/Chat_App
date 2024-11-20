@@ -266,6 +266,7 @@ public class Main {
         return scrollPane;
     }
 
+    // add button
     private static JButton createMenuButton(String iconPath, String activeIconPath, String menuType) {
         JButton button = new JButton();
         button.setIcon(loadIcon(iconPath));
